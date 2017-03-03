@@ -1,0 +1,282 @@
+/* ------------------全局样式----------------- */
+a{
+	text-decoration: none;
+	color: black;
+}
+/* ul有默认font-size,需清掉 */
+ul{
+	font-size: 0; 
+}
+/*清除按钮点击后的边框*/
+button{
+	outline: none;
+}
+
+/* ------------------背景样式----------------- */
+/*背景图片*/
+@font-style : "Microsoft YaHei"; /*页面字体*/
+@bg-pic : '../images/bg.jpg'; 
+/* ------------------ 颜 色 -------------------*/
+@red : red;
+@orange : orange;
+@yellow : yellow;
+@green : green;
+@aqua : aqua;
+@blue : blue;
+@purple : purple;
+@indigo : indigo;
+@violet : violet;
+@gray : gray;
+/*--------------------- 按钮样式 ------------------------*/
+.btnColor (@btnColor: black; @backgroundColor: white;){
+	color: @btnColor;
+	background: @backgroundColor;
+}
+
+
+html{
+	height: 100%;
+	font-family: @font-style;
+}
+/* --------------------- 根据不同设备提供不同大小的图片以优化资源 ------------------------- */
+@media (max-width: 767px) {
+	@bg-pic : "../images/bg_s.jpg";
+	body{
+		background: url(@bg-pic) center center no-repeat fixed; /*背景图片居中不重复并保持固定*/
+	}
+}
+@media screen and (min-width: 768px) {
+	@bg-pic : "../images/bg.jpg";
+	body{
+		background: url(@bg-pic) center center no-repeat fixed; /*背景图片居中不重复并保持固定*/
+	}
+}
+/* ----------------------------------------------------------------------------------------- */
+body{
+	background-size: cover; /*覆盖背景*/
+}
+
+/*------------------------ 内容主体 -----------------------*/
+#wrap{
+	margin: 0 .5rem;
+	margin-top: .3rem;
+	position: relative;
+	/*导航  阴影和border相关的px值作了保留*/
+	.navbar li{
+		border: 1px solid lighten(@gray,20%);
+		border-radius: 10px;
+		cursor: pointer;
+		text-align: center;
+		font-size: 18px;
+		-webkit-transition: 0.4s;
+		transition: 0.4s;
+		box-shadow: 3px 3px 5px darken(@gray,10%);
+		&:nth-child(1){
+			background-color: lighten(@red,10%);
+		}
+		&:nth-child(2){
+			background-color: lighten(@orange,10%);
+		}
+		&:nth-child(3){
+			background-color: lighten(@yellow,10%);
+		}
+		&:nth-child(4){
+			background-color: lighten(@green,10%);
+		}
+		&:hover{
+			box-shadow: 7px 7px 8px darken(@gray,20%);
+			a{
+				color: white;
+			}
+		}
+	}
+}
+
+/* --------------------- 分 页 ------------------------ */
+#page-stage{
+	width: 90%;
+	position: absolute;
+	left: 50%;
+	margin-left: -45%;
+	display: none;
+	.show{
+		height: 80%;
+		margin-top: .3rem;
+		background: -webkit-linear-gradient(left top,@red,@orange,@yellow,@green,@blue,@indigo,@violet);
+		background: linear-gradient(left top,@red,@orange,@yellow,@green,@blue,@indigo,@violet);
+		opacity: .7;
+		filter: alpha(opacity=70);
+		border-radius: .15rem;
+		box-shadow: 0 0 2rem white inset;
+		.page-num{
+			position: relative;
+			top: 45%;
+			text-align: center;
+			font-size: 40px;
+			color: lighten(@red,20%);
+		}
+	}
+	.pagination-wrap{
+/*-------根据内容自适应调整宽度的盒子,因宽度不明，需利用translate来居中----------*/
+		display: inline-block;
+		position: absolute;
+		left: 50%;
+		-webkit-transform: translate(-50%,.2rem);
+		        transform: translate(-50%,.2rem);
+/*------------------------------------------------------------------------------*/
+	}
+}
+
+/*----------------------------- 媒体查询 ---------------------------*/
+@media (min-width: 768px) {
+	#wrap{
+		.navbar{
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-pack: center;
+			    -ms-flex-pack: center;
+			        justify-content: center;
+			-ms-flex-wrap: wrap;
+			    flex-wrap: wrap;
+			    li{
+			    	display: inline-block;
+			    	min-width: .8rem;
+			    	line-height: .4rem;
+			    	margin-right: .3rem;
+			    }
+		}
+	}
+	.nav-list{
+		display: none;
+	}
+	#page-stage{
+		height: 3.5rem;
+		.pagination-wrap .pagination{
+			/* width设为100%以通过内容撑开父级 */
+			width: 100%;
+			height: .4rem;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-ms-flex-pack: distribute;
+			    justify-content: space-around;
+	        -webkit-box-align: center;
+	            -ms-flex-align: center;
+	                align-items: center;
+			padding: 0 .08rem;
+			background-color: rgb(91,137,150);
+			border-radius: 5px;
+			box-shadow: 3px 5px 1px rgb(61,101,111);
+			a{
+				height: .25rem;
+				line-height: .25rem;
+				padding: 0 .1rem;
+				/* margin-right需设置合适值，否则文字会溢出 */
+				margin-right: .08rem;
+				box-shadow: 2px 3px 1px rgb(128,176,188);
+				font-size: 16px;
+				border-radius: 5px;
+				-webkit-transition: 0.2s;
+				transition: 0.2s;
+				.btnColor(black,rgb(158,206,220));
+				&:hover{
+					color: white;
+					background-color: rgb(185,222,232);
+				}
+				&:last-child{
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	#wrap{
+		.navbar{
+			display: none;
+			padding-top: .4rem;
+			width: 100%;
+			    li{
+			    	display: inline-block;
+			    	width: 100%;
+			    	line-height: .3rem;
+			    	margin-top: .05rem;
+			    }
+		}
+	}
+	.nav-list{
+		width: 1rem;
+		height: .4rem;
+		position: absolute;
+		top: 0;bottom: 0;left: 0;right: 0;
+		margin: 0 auto; /*居中定位*/
+		font-size: 25px;
+		border-radius: 10px;
+		.btnColor(darken(aqua,10%),linear-gradient(white,black));
+		.btnColor(darken(aqua,10%),-webkit-linear-gradient(white,black));
+		cursor: pointer;
+		z-index: 10;
+		box-shadow: 0 0 25px #111;
+		&:hover{
+			color: lighten(aqua,10%);
+			box-shadow: 0 0 25px white;
+		}
+	}
+	#page-stage{
+		height: 3rem;
+		margin-top: .2rem;
+		.pagination-wrap{
+			width: 1rem;
+			height: .4rem;
+			cursor: pointer;
+			background: linear-gradient(black,white);
+			background: -webkit-linear-gradient(black,white);
+			box-shadow: 0 0 25px white;
+			.pagination{
+				/*设置bottom为100%，使整个列表能放在按钮上方*/
+				position: absolute;
+				bottom: 100%;
+				display: none;
+				a{
+					display: block;
+					width: 1rem;
+					height: .25rem;
+					line-height: .25rem;
+					font-size: 16px;
+					text-align: center;
+					font-size: 16px;
+					outline: 1px solid white;
+					border-radius: 5px;
+					.btnColor(black,rgb(158,206,220));
+					&:hover{
+						color: white;
+						background-color: rgb(185,222,232);
+					}
+				}
+			}
+			/*为按钮添加内容*/
+			&::before{
+				content: "Pages";
+				font-size: 26px;
+				color: darken(aqua,10%);
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-webkit-transform: translate(-50%,-50%);
+				        transform: translate(-50%,-50%);
+			}
+			&:hover{
+				box-shadow: 0 0 25px black;
+				&::before{
+					color: lighten(aqua,10%);
+				}
+			}
+		}
+	}
+}
+
+/*
+	BUG：屏幕大小为814px时，navbar和pagination没显示，但调试器里会显示
+*/
